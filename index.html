@@ -843,10 +843,6 @@ src="https://www.facebook.com/tr?id=876782168289067&ev=PageView&noscript=1"
     })
     .catch(err => console.error('Webhook error:', err))
     .finally(() => {
-      // Fire Meta Pixel Lead event (qualified submission)
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead');
-      }
       // Fire Google Analytics conversion event
       if (typeof gtag === 'function') {
         gtag('event', 'qualified_submission', {
