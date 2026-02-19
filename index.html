@@ -4,6 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tubalcain — Installer Access Request</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TZ6FE345VT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TZ6FE345VT');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '876782168289067');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=876782168289067&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -494,7 +522,7 @@
   </p>
 
   <div class="urgency-bar">
-    ⚠️ &nbsp;Only 5 partner slots left this week.
+    ⚠️ &nbsp;Only 8 partner slots available this week — Access closes Friday at midnight
   </div>
 
   <!-- Progress indicator -->
@@ -815,6 +843,17 @@
     })
     .catch(err => console.error('Webhook error:', err))
     .finally(() => {
+      // Fire Meta Pixel Lead event (qualified submission)
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead');
+      }
+      // Fire Google Analytics conversion event
+      if (typeof gtag === 'function') {
+        gtag('event', 'qualified_submission', {
+          event_category: 'form',
+          event_label: 'installer_qualifier'
+        });
+      }
       window.location.href = 'https://tubalcain.systeme.io/solar-portal';
     });
   }
