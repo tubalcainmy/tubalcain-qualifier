@@ -677,8 +677,12 @@ src="https://www.facebook.com/tr?id=876782168289067&ev=PageView&noscript=1"
       <p class="q-sub">Before applying for our DFY service, we will show you a full breakdown of how we deliver pre-qualified homeowners to your phone — the exact targeting, filtering process, and what a typical week looks like for our partners. Then you can decide if it is the right fit for your business.</p>
       <div class="field-group">
         <div class="field">
-          <label>Full Name</label>
-          <input type="text" id="fname" placeholder="e.g. Chukwuemeka Okafor" autocomplete="name" />
+          <label>First Name</label>
+          <input type="text" id="fname" placeholder="e.g. Chukwuemeka" autocomplete="given-name" />
+        </div>
+        <div class="field">
+          <label>Last Name</label>
+          <input type="text" id="flname" placeholder="e.g. Okafor" autocomplete="family-name" />
         </div>
         <div class="field">
           <label>WhatsApp Number</label>
@@ -804,13 +808,14 @@ src="https://www.facebook.com/tr?id=876782168289067&ev=PageView&noscript=1"
   }
 
   function submitForm() {
-    const name = document.getElementById('fname').value.trim();
+    const firstName = document.getElementById('fname').value.trim();
+    const lastName = document.getElementById('flname').value.trim();
     const phone = document.getElementById('fphone').value.trim();
     const email = document.getElementById('femail').value.trim();
     const city = document.getElementById('fcity').value.trim();
     const errEl = document.getElementById('err5');
 
-    if (!name || !phone || !email || !city) {
+    if (!firstName || !lastName || !phone || !email || !city) {
       errEl.style.display = 'block';
       errEl.textContent = 'Please fill in all fields to get access.';
       return;
@@ -831,7 +836,9 @@ src="https://www.facebook.com/tr?id=876782168289067&ev=PageView&noscript=1"
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         timestamp: new Date().toISOString(),
-        name,
+        first_name: firstName,
+        last_name: lastName,
+        name: firstName + ' ' + lastName,
         phone,
         email,
         city,
